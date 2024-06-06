@@ -12,5 +12,27 @@ const parent=React.createElement("div",{id:"parent"},
     )
 )
 
+//JSX -> Gets converted to React.CreateElement by Babel -> which is then converted to DOM using react
+
+const jsxHeading=<h1 id="heading" className="head">Namaste React </h1>;
+
+const TitleComponent=()=>(
+    <h1 className="title">React Title</h1>
+);
+
+const number=1000;
+
+const title=<h1>JSX Element Title</h1>;
+
+//React Functional Component - returns jsx or react element
+const HeadingComponent=()=>(
+    <div id="container">
+        <TitleComponent />
+        <h1 className="heading">Namaste React</h1>
+        {title}
+        {number}
+    </div>
+);
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(parent);
+root.render(<HeadingComponent />);
