@@ -8,9 +8,9 @@ const Body=()=>{
     const [searchRestArray, setSearchRestArray]=useState(resList);
     const [searchText, setSearchText]=useState("");
     
-    useEffect(()=>{
-        fetchData();
-    },[]);
+    // useEffect(()=>{
+    //     fetchData();
+    // },[]);
 
     if(restArray.length===0){
         return <Shimmer />;
