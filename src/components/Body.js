@@ -3,6 +3,7 @@ import resList from "../utils/mockData";
 import {useState, useEffect} from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body=()=>{
     const [restArray, setRestArray]=useState(resList);
@@ -12,6 +13,7 @@ const Body=()=>{
     // useEffect(()=>{
     //     fetchData();
     // },[]);
+
 
     if(restArray.length===0){
         return <Shimmer />;
@@ -31,6 +33,9 @@ const Body=()=>{
         setRestArray(filteredRestArray);
         // console.log('after clicked',restArray)
     };
+
+    const onlineStatus=useOnlineStatus();
+    if(onlineStatus===false) return <h1>Offline!!</h1>
     return (
     <div className="body">
         <div className="filter">
