@@ -1,6 +1,6 @@
 // const heading = React.createElement("h1", {id:"heading"}, "Hello from React!")
 
-import React, {lazy,Suspense} from "react";
+import React, {lazy,Suspense, useState} from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -10,16 +10,33 @@ import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 // import Grocery from "./components/Grocery";
 import {createBrowserRouter, RouterProvider, Outlet} from "react-router-dom";
+import { useState, useEffect } from "react";
+import UserContext from "./utils/UserContext";
 
 const Grocery=lazy(()=>import("./components/Grocery"));
 
 //Parent Component
-const AppLayout=()=>(
-    <div className="app">
-        <Header/>
-        <Outlet/>
-    </div>
-);
+const AppLayout=()=>{
+    const [userInfo,setUserInfo]=useState();
+
+    //authentication
+    useEffect(()=>{
+        //api call is made and user is received
+        const data={
+            name:"Tanmay",
+        };
+        setUserInfo(data.name);
+    },[]);
+    return (
+        <UserContext.Provider value={{loggedInUser:userInfo, setUserInfo}}>
+            <div className="app">
+                <UserContext.Provider value={{loggedInUser:"Ambani"}}><Header/></UserContext.Provider>
+            
+            <Outlet/>
+        </div>
+        </UserContext.Provider>
+    );
+}
 
 const appRouter=createBrowserRouter([
     {

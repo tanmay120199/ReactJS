@@ -674,8 +674,8 @@ const resList=[
             "clickActionDeeplink": ""
         },
         "distance": "2.6 km",
-        "isPromoted": false,
-        "promotedText": "",
+        "isPromoted": true,
+        "promotedText": "Promoted",
         "trackingData": [
             {
                 "table_name": "zsearch_events_log",
@@ -961,7 +961,7 @@ const resList=[
             "clickActionDeeplink": ""
         },
         "distance": "383 m",
-        "isPromoted": false,
+        "isPromoted": true,
         "promotedText": "",
         "trackingData": [
             {
@@ -1388,8 +1388,8 @@ const resList=[
             "clickActionDeeplink": ""
         },
         "distance": "5.1 km",
-        "isPromoted": false,
-        "promotedText": "",
+        "isPromoted": true,
+        "promotedText": "Promoted",
         "trackingData": [
             {
                 "table_name": "zsearch_events_log",

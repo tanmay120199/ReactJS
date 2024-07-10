@@ -1,20 +1,21 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, {withPromotedLabel} from "./RestaurantCard";
 import resList from "../utils/mockData";
-import {useState, useEffect} from "react";
+import {useState, useEffect, useContext} from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 const Body=()=>{
     const [restArray, setRestArray]=useState(resList);
     const [searchRestArray, setSearchRestArray]=useState(resList);
     const [searchText, setSearchText]=useState("");
-    
+    const PromotedResCard=withPromotedLabel(RestaurantCard);
     // useEffect(()=>{
     //     fetchData();
     // },[]);
 
-
+    const {loggedInUser,setUserInfo}=useContext(UserContext);
     if(restArray.length===0){
         return <Shimmer />;
     }
@@ -58,12 +59,16 @@ const Body=()=>{
                 }}>Search</button>
                 <button className="px-4 py-2 bg-gray-100" onClick={handleClick}>Top Rated Restaurants</button>
             </div>
+            <div className="search m-4 p-4 flex items-center">
+                <label>Username:</label>
+                <input className="border border-black" value={loggedInUser} onChange={(e)=>setUserInfo(e.target.value)} />
+            </div>
             
         </div>
         <div className="flex flex-wrap">
             {
                 restArray.map((restaurant)=>(
-                   <Link to={"/restaurants/" + restaurant.info.resId} key={restaurant.info.resId}><RestaurantCard  resData={restaurant}/></Link>
+                   <Link to={"/restaurants/" + restaurant.info.resId} key={restaurant.info.resId}>{restaurant.isPromoted?<PromotedResCard resData={restaurant}/>:<RestaurantCard  resData={restaurant}/>}</Link>
                 ))
             }
         </div>
