@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import {useParams} from "react-router-dom";
 import useRestaurant from "../utils/useRestaurant"
+import {useDispatch} from "react-redux";
+import {addItem} from "../utils/cartSlice";
 
 const RestaurantMenu = () => {
     //Custom Hook
@@ -10,6 +12,12 @@ const RestaurantMenu = () => {
 
     const params=useParams();
     console.log('params',params)
+
+    const dispatch=useDispatch();
+
+    const handleAddItem =(item)=>{
+        dispatch(addItem(item));
+    };
 
     return resInfo===null? (<Shimmer />) : (
         <div className="menu">
@@ -20,6 +28,7 @@ const RestaurantMenu = () => {
                 <li>Burgers</li>
                 <li>Diet Coke</li>
             </ul>
+            <button className="p-2 rounded-lg bg-black text-white shadow-lg" onClick={()=>handleAddItem("pizza")}>Add +</button>
         </div>
     );
 };
